@@ -9,8 +9,7 @@ class EmailArticlePlugin < Noosfero::Plugin
   end
 
   def article_extra_toolbar_buttons(article)
-#raise current_person.identifier.inspect + "  " + profile.identifier.inspect + ' ' + current_person.is_admin?.inspect + " " + article.kind_of?(TextArticle).inspect + " " + profile.admins.include?(current_person).inspect
-    return [] if !(profile.admins.include?(current_person) || current_person.is_admin?) || !article.kind_of?(TextArticle)
+    return [] if !(profile.is_admin?(current_person) || current_person.is_admin?) || !article.kind_of?(TextArticle)
     {
       :icon => 'icon-menu-mail',
       :url => { :profile => profile.identifier, :controller => 'email_article_plugin_myprofile', :action => "send_email", :id => article},

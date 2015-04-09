@@ -4,7 +4,7 @@ class EmailArticlePluginMyprofileController < MyProfileController
   needs_profile
 
   def send_email
-    unless user.is_admin?(profile)
+    unless profile.is_admin?(user) || user.is_admin?
       render :status => :forbidden, :text => "Forbidden user"
       return
     end

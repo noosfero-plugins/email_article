@@ -5,7 +5,7 @@ class EmailArticlePluginTest < ActiveSupport::TestCase
   def setup
     @environment = Environment.default
     @user = create_user('testuser').person
-    @profile = fast_create(Profile)
+    @profile = fast_create(Organization)
     context = mock()
     context.stubs(:current_person).returns(@user)
     context.stubs(:profile).returns(@profile)
@@ -33,7 +33,6 @@ class EmailArticlePluginTest < ActiveSupport::TestCase
   end
 
   should 'display button to send email for all members of a community if the user is an environment administrator' do
-#    profile.add_admin(user)
     environment.add_admin(user)
     article = fast_create(TextArticle, :profile_id => profile.id)
     assert_not_equal [], plugin.article_extra_toolbar_buttons(article)
