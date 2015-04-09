@@ -32,7 +32,7 @@ class EmailArticlePluginMyprofileControllerTest < ActionController::TestCase
     assert_response 403
   end
 
-  should 'show button at article_toolbar_extra_buttons' do
+  should 'show button at article_extra_toolbar_buttons' do
     @profile = Community.create!(:name => 'Another community', :identifier => 'another-community')
     @user = create_user('user-out-of-the-community')
     login_as(@user.login)
@@ -43,7 +43,7 @@ class EmailArticlePluginMyprofileControllerTest < ActionController::TestCase
     @article.save
     @plugin = EmailArticlePlugin.new
     @plugin.stubs(:link_to_remote).returns(true)
-    send_mail_button = @plugin.article_toolbar_extra_buttons
+    send_mail_button = @plugin.article_extra_toolbar_buttons(@article)
     self.stubs(:profile).returns(@profile)
     self.stubs(:user).returns(@user)
 #    self.stubs(:page).returns(@article)

@@ -8,25 +8,13 @@ class EmailArticlePlugin < Noosfero::Plugin
     _("A plugin that emails an article to the members of the community")
   end
 
-  def article_toolbar_extra_buttons
-    label = _("Send article to members")
-    htmlclass = _("button with-text icon-menu-mail")
-    title = _("Email article to all community members")
-    proc do
-      if  !profile.blank? and !user.blank? and user.is_admin?(profile) and @page.kind_of?(TextArticle)
-        link_to_remote(
-            label,
-            {
-               :url => { :profile => profile.identifier, :controller => 'email_article_plugin_myprofile', :action => "send_email", :id => @page},
-               :method => :get,
-               :success => "display_notice('" + _("Messages are being sent") + "')",
-               :failure => "display_notice('" + _("Error sending emails") + "')",
-               :confirm => _("Are you sure you want to email this article to all community members?"),
-            },
-            :class => htmlclass,
-            :title => title
-         )
-      end
-    end
+  def article_extra_toolbar_buttons(article)
+#raise current_person.identifier.inspect + "  " + profile.identifier.inspect + ' ' + current_person.is_admin?.inspect + " " + article.kind_of?(TextArticle).inspect + " " + profile.admins.include?(current_person).inspect
+    return [] if !(profile.admins.include?(current_person) || current_person.is_admin?) || !article.kind_of?(TextArticle)
+    {
+      :icon => 'icon-menu-mail',
+      :url => { :profile => profile.identifier, :controller => 'email_article_plugin_myprofile', :action => "send_email", :id => article},
+      :title => _("Send article to members")
+    }
   end
 end

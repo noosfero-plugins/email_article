@@ -69,13 +69,6 @@ class EmailArticlePluginArticleMailerTest < ActiveSupport::TestCase
     assert_equal "#{community.environment.top_url}/#{community.name.to_slug}/", mailing.url
   end
 
-  should 'deliver mailing to each member after create' do
-    mailing = create(OrganizationMailing, :source => community, :subject => 'Hello', :body => 'We have some news', :person => person)
-    community.reload
-    process_delayed_job_queue
-    assert_equal 2, ActionMailer::Base.deliveries.count
-  end
-
   should 'deliver mailing when there are many mailings created' do
     50.times { create(OrganizationMailing, :source => community, :subject => 'Hello', :body => 'We have some news', :person => person) }
     community.reload
