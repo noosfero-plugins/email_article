@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.1-2267-gd7d222b\n"
-"POT-Creation-Date: 2015-06-05 09:01-0300\n"
+"Project-Id-Version: 1.2~rc1-2843-g999a037\n"
+"POT-Creation-Date: 2015-08-06 08:53-0300\n"
 "PO-Revision-Date: 2015-06-05 08:42-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,8 @@ msgstr ""
 #: plugins/email_article/lib/email_article_plugin.rb:8
 #: plugins/email_article/test/unit/email_article_plugin_test.rb:26
 msgid "A plugin that emails an article to the members of the community"
-msgstr "Um plugin que envia um artigo por email para todos os membros da comunidade"
+msgstr ""
+"Um plugin que envia um artigo por email para todos os membros da comunidade"
 
 #: plugins/email_article/lib/email_article_plugin.rb:16
 msgid "Send article to members"
